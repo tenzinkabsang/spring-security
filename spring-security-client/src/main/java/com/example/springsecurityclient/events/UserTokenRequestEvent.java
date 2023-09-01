@@ -1,5 +1,6 @@
 package com.example.springsecurityclient.events;
 
+import com.example.springsecurityclient.entities.User;
 import com.example.springsecurityclient.entities.VerificationToken;
 import com.example.springsecurityclient.services.UserService;
 import lombok.Getter;

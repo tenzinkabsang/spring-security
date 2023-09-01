@@ -11,7 +11,7 @@ import java.util.TimeZone;
 @Entity
 @Data
 @NoArgsConstructor
-public class VerificationToken {
+public class PasswordResetToken {
     private static final int EXPIRATION_TIME = 15;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,25 +24,25 @@ public class VerificationToken {
     @JoinColumn(
             name = "user_id",
             referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "FK_User"),
+            foreignKey = @ForeignKey(name = "FK_User_Password_Token"),
             nullable = false
     )
     private User user;
 
-    public VerificationToken(String token) {
+    public PasswordResetToken(String token) {
         super();
         this.token = token;
         this.expirationTime = calculateExpirationDate();
     }
 
-    public VerificationToken(User user, String token) {
+    public PasswordResetToken(User user, String token) {
         super();
         this.user = user;
         this.token = token;
         this.expirationTime = calculateExpirationDate();
     }
 
-    private Date calculateExpirationDate() {
+    public Date calculateExpirationDate() {
         TimeZone utc = TimeZone.getTimeZone("UTC");
         Calendar calendar = Calendar.getInstance(utc);
         calendar.setTimeInMillis(new Date().getTime());
@@ -50,7 +50,7 @@ public class VerificationToken {
         return new Date(calendar.getTime().getTime());
     }
 
-    public boolean isExpired() {
+    public boolean hasExpired() {
         Calendar cal = Calendar.getInstance();
         return getExpirationTime().getTime() - cal.getTime().getTime() <= 0;
     }

@@ -1,5 +1,6 @@
 package com.example.springsecurityclient.events;
 
+import com.example.springsecurityclient.entities.PasswordResetToken;
 import com.example.springsecurityclient.entities.VerificationToken;
 import com.example.springsecurityclient.services.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -34,3 +35,4 @@ public class UserTokenRequestEventListener implements ApplicationListener<UserTo
         log.info("New token created for user: {}", url);
     }
 }
+
